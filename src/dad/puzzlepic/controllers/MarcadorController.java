@@ -28,10 +28,7 @@ public class MarcadorController implements Initializable {
     private ComboBox<Modo> comboGame;
 
     @FXML
-    private Button consultarButton;
-
-    @FXML
-    private Button volverButton;
+    private Button consultarButton, volverButton;
 
     @FXML
     private TableView<?> tableScores;
@@ -53,11 +50,6 @@ public class MarcadorController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> puntuacionColumn;
-    
-   
-    
-
-	 
 
 	public MarcadorController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/MarcadorView.fxml"));
@@ -71,8 +63,6 @@ public class MarcadorController implements Initializable {
 
 
 	}
-
-	
 
 	public BorderPane getView() {
 		return view;

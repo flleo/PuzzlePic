@@ -1,28 +1,17 @@
 package dad.puzzlepic.controllers;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 import dad.puzzlepic.views.PuzzlePicApp;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Dialog;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.DirectoryChooser;
@@ -33,7 +22,6 @@ import dad.puzzlepic.controllers.MenuController;
 import dad.puzzlepic.controllers.OpcionesPartidasController;
 import dad.puzzlepic.controllers.PuzzlePiecesController;
 import dad.puzzlepic.models.Jugador;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {

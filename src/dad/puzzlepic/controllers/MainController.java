@@ -1,6 +1,8 @@
 package dad.puzzlepic.controllers;
 
 import java.io.File;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -24,6 +26,12 @@ import dad.puzzlepic.controllers.PuzzlePiecesController;
 import dad.puzzlepic.models.Jugador;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author fede, issac
+ *
+ */
+
 public class MainController implements Initializable {
 
 	private BorderPane vista;
@@ -40,6 +48,10 @@ public class MainController implements Initializable {
 	private File[] fotos = null;
 	
 
+	/**
+	 * 
+	 * @throws IOException
+	 */
 
 	public MainController() throws IOException {
 
@@ -70,11 +82,20 @@ public class MainController implements Initializable {
 	}
 
 	
-
+	/**
+	 * 
+	 * @param e
+	 */
 	private void onVolverMenuButtonAction(ActionEvent e) {
 		vista.setCenter(controladorMenu.getView());
 	}
 
+	/**
+	 * 
+	 * @param title
+	 * @param initialDirectory
+	 * @return
+	 */
 	public File directorioChooser(String title, String initialDirectory) {
 		DirectoryChooser fch = new DirectoryChooser();
 		fch.setTitle(title);
@@ -82,6 +103,14 @@ public class MainController implements Initializable {
 		return fch.showDialog(primaryStage);
 	}
 
+	/**
+	 * 
+	 * @param title
+	 * @param initialDirectory
+	 * @param tipoDeFichero
+	 * @param extension
+	 * @return
+	 */
 	public File fileChooser(String title, String initialDirectory, String tipoDeFichero, String extension) {
 		FileChooser fch = new FileChooser();
 		fch.setTitle(title);
@@ -91,6 +120,13 @@ public class MainController implements Initializable {
 		return fch.showOpenDialog(primaryStage);
 	}
 
+	/**
+	 * 
+	 * @param string
+	 * @param string2
+	 * @param string3
+	 * @return
+	 */
 	public Optional<ButtonType> confirmacion(String string, String string2, String string3) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle(string);
@@ -101,6 +137,13 @@ public class MainController implements Initializable {
 		return alert.showAndWait();
 	}
 
+	/**
+	 * @
+	 * @param string
+	 * @param string2
+	 * @param string3
+	 * @return
+	 */
 	public Optional<ButtonType> advertencia(String string, String string2, String string3) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle(string);
@@ -111,6 +154,10 @@ public class MainController implements Initializable {
 		return alert.showAndWait();
 	}
 
+	/**
+	 * 
+	 * @param string
+	 */
 	public void informacion(String string) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Agenda de contactos");
@@ -120,6 +167,12 @@ public class MainController implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 * @param string
+	 * @param string2
+	 * @param e1
+	 */
 	public void error(String string, String string2, Exception e1) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(string);

@@ -39,7 +39,7 @@ public class TroceadorImagenes {
         File[] fotos = new File[rows*cols];
         //writing mini images into image files
         for (int i = 0; i < imgs.length; i++) {
-        	fotos[i] = new File("PuzzlePic/src/dad/puzzlepic/resources/troceadas/" + i + file.getName());
+        	fotos[i] = new File("src/dad/puzzlepic/resources/troceadas/" + i + file.getName());
             ImageIO.write(imgs[i], "jpg", fotos[i]);
         }
         System.out.println("Mini images created");

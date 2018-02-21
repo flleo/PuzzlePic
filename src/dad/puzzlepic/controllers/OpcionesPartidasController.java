@@ -212,7 +212,7 @@ public class OpcionesPartidasController implements Initializable {
 	}
 
 	private void vaciaTroceadas() {
-		File directorioTroceadas = new File("PuzzlePic/src/dad/puzzlepic/resources/troceadas");			
+		File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas");			
 		for (File listFile : directorioTroceadas.listFiles()) 
 		listFile.delete();
 	}

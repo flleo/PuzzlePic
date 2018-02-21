@@ -149,22 +149,7 @@ public class OpcionesPartidasController implements Initializable {
 
 		} else {
 			seleccionarFoto();
-			// Esto hay que arreglarlo
-		  /*Properties archivoPropiedades = new Properties();
-			OutputStream output = null;
-
-			File file = new File("config.properties");
-
-			try {
-				if (file.exists())
-					file.delete();
-
-				output = new FileOutputStream("config.properties");
-
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			//*/
+		
 			
 				switch (lvlCombo.getValue()) {
 
@@ -212,7 +197,7 @@ public class OpcionesPartidasController implements Initializable {
 	}
 
 	private void vaciaTroceadas() {
-		File directorioTroceadas = new File("PuzzlePic/src/dad/puzzlepic/resources/troceadas");			
+		File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas");			
 		for (File listFile : directorioTroceadas.listFiles()) 
 		listFile.delete();
 	}

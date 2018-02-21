@@ -101,19 +101,24 @@ public class PuzzlePiecesController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		// Hacemos la mezcla
+		mezclarFotosTroceadas();
+		
+	}
+
+	private void mezclarFotosTroceadas() {
 		if(fotos!=null) {
-		while (mezcla.size() < 10){
-			int n = (int) (Math.random()*9+0);
-			if(!mezcla.contains(fotos[n])) {
-				mezcla.add(fotos[n]);
-				System.out.println(fotos[n].getAbsolutePath());
+			while (mezcla.size() < 10){
+				int n = (int) (Math.random()*9+0);
+				if(!mezcla.contains(fotos[n])) {
+					mezcla.add(fotos[n]);
+					System.out.println(fotos[n].getAbsolutePath());
+				}
 			}
-		}
-		mezcla.get(0).getAbsolutePath();
-		// Bindeos
-		mezcla1.imageProperty().set(new Image(mezcla.get(0).getAbsolutePath()));
-		}
+			mezcla.get(0).getAbsolutePath();
+			// Bindeos
+			mezcla1.imageProperty().set(new Image(mezcla.get(0).getAbsolutePath()));
+			}
+		
 	}
 
 	@FXML

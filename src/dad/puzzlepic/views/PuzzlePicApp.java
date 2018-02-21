@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 
 /**
  * 
- * @author  Federico
+ * @author  Fede, Issac
  *
  */
 public class PuzzlePicApp extends Application {

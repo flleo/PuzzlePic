@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox prefHeight="31.0" prefWidth="654.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#abandonarOnAction" text="Abandonar" textFill="#e80a0a" />
+            <Button fx:id="abandonarButton" mnemonicParsing="false" onAction="#abandonarOnAction" text="Abandonar" textFill="#e80a0a" />
          </children>
       </HBox>
    </bottom>
@@ -64,7 +64,7 @@
       <VBox BorderPane.alignment="CENTER">
          <children>
             <Separator prefWidth="200.0" />
-            <Label alignment="CENTER" text="La mezcla" />
+            <Label alignment="CENTER" text="Original" />
             <GridPane fx:id="lamezcla" minHeight="0.0" minWidth="0.0" VBox.vgrow="SOMETIMES">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -168,7 +168,7 @@
       <VBox maxHeight="486.0" maxWidth="335.0" prefHeight="486.0" prefWidth="335.0">
          <children>
             <Separator prefWidth="200.0" />
-            <Label alignment="CENTER" text="Mi foto" />
+            <Label alignment="CENTER" text="Reto" />
             <GridPane fx:id="mifoto" maxHeight="300.0" maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />

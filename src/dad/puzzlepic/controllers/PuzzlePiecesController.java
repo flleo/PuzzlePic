@@ -100,8 +100,7 @@ public class PuzzlePiecesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		mezclarFotosTroceadas();
+		//mezclarFotosTroceadas();
 		
 	}
 
@@ -118,7 +117,6 @@ public class PuzzlePiecesController implements Initializable {
 			// Bindeos
 			mezcla1.imageProperty().set(new Image(mezcla.get(0).getAbsolutePath()));
 			}
-		
 	}
 
 	@FXML

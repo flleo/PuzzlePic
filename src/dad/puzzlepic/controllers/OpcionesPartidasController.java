@@ -70,6 +70,7 @@ public class OpcionesPartidasController implements Initializable {
 	private TroceadorImagenes troceadorImagenes = new TroceadorImagenes();
 	private Jugador jugador = new Jugador();
 	private File foto;
+	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
 	
 
 	public OpcionesPartidasController(MainController mainController) throws IOException {
@@ -128,7 +129,7 @@ public class OpcionesPartidasController implements Initializable {
 			mainController.error("Error de seleeción", "No se puedo cargar la carpeta, de imagenes", e1);
 		}
 	}
-
+/*
 	private void guardaFoto() {
 		File fotosJugador = new File("jugadores/" + jugador.getNombre() + "fotos/" + selectedDirectory.get().getName());
 		if(!fotosJugador.exists())
@@ -136,7 +137,7 @@ public class OpcionesPartidasController implements Initializable {
 		selectedDirectory.get().renameTo(fotosJugador);
 		
 	}
-
+*/
 	private void onIniciarPartidaButtonAction(ActionEvent e) throws IOException  {
 		if (jugador.getNombre().equals("") || selectedDirectory.get().getName().equals("")) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -154,17 +155,18 @@ public class OpcionesPartidasController implements Initializable {
 				switch (lvlCombo.getValue()) {
 
 				case FACIL:
-					vaciaTroceadas();
+					System.out.println("FACIL");
+					mainController.vaciaDirectorio(directorioTroceadas);
 					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 3));
 					break;
 					
 				case MEDIA:
-					vaciaTroceadas();
+					mainController.vaciaDirectorio(directorioTroceadas);
 					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 6));
 					break;
 
 				case DIFICIL:
-					vaciaTroceadas();
+					mainController.vaciaDirectorio(directorioTroceadas);
 					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 9));
 					break;
 
@@ -196,12 +198,7 @@ public class OpcionesPartidasController implements Initializable {
 		}
 	}
 
-	private void vaciaTroceadas() {
-		File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas");			
-		for (File listFile : directorioTroceadas.listFiles()) 
-		listFile.delete();
-	}
-
+	
 	private void seleccionarFoto() {
 		File[] fotos = selectedDirectory.get().listFiles();
 		int size = fotos.length;

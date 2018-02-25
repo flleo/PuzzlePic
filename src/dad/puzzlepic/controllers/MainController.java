@@ -60,7 +60,7 @@ public class MainController implements Initializable {
 		controladorMarcador = new MarcadorController();
 		controladorMenu = new MenuController(this);
 		controladorOpciones = new OpcionesPartidasController(this);
-		controladorPuzzlePieces = new PuzzlePiecesController(this);
+		//controladorPuzzlePieces = new PuzzlePiecesController(this);
 		matchPuzzleController = new MatchPuzzleController(this);
 		slidingPuzzleController = new SlidingPuzzleController(this);
 		
@@ -89,6 +89,16 @@ public class MainController implements Initializable {
 	private void onVolverMenuButtonAction(ActionEvent e) {
 		vista.setCenter(controladorMenu.getView());
 	}
+	
+	/**
+	 * @author fede
+	 * @param directorio
+	 */
+	public void vaciaDirectorio(File directorio) {
+		for (File listFile : directorio.listFiles()) 
+		listFile.delete();
+	}
+
 
 	/**
 	 * 

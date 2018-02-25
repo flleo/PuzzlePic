@@ -17,6 +17,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * 
+ * @author fede
+ *
+ */
 public class PuzzlePiecesController implements Initializable {
 
 	private PuzzlePicApp app;
@@ -82,41 +87,70 @@ public class PuzzlePiecesController implements Initializable {
 	//
 
 	private MainController mainController;
-	private ArrayList<File> mifotos = new ArrayList<>();
-	private ArrayList<File> mezcla = new ArrayList<>();
-	private File[] fotos;
-
+	private ArrayList<File> mifotos = new ArrayList<>();	
+	private ArrayList<File> troceadas = new ArrayList<>();
+    private ArrayList<Integer> mezcla = new ArrayList<>();
+	/**
+	 * @author fede
+	 * @param mainController 
+	 * @param mainController
+	 * @throws IOException
+	 */
 	public PuzzlePiecesController(MainController mainController) throws IOException {
-		this.mainController = mainController;		
-		this.fotos = mainController.getFotos();
+		this.mainController = mainController;	
 		
-
+		for (File file : mainController.getFotos()) {
+			this.troceadas.add(file);
+		}
+		//System.out.println(troceadas.length+"cantidad ppcontroller");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/PuzzlePiecesView.fxml"));
 		loader.setController(this);
 		loader.load();
 
 		initialize(null, null);
+	
 	}
-
+	/**
+	 * @author fede
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//mezclarFotosTroceadas();
+		try {
+				mezcla();
+				
+				mezcla0.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(0)).getName()));				
+				mezcla1.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(1)).getName()));				
+				mezcla2.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(2)).getName()));				
+				mezcla3.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(3)).getName()));				
+				mezcla4.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(4)).getName()));				
+				mezcla5.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(5)).getName()));				
+				mezcla6.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(6)).getName()));				
+				mezcla7.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(7)).getName()));				
+				mezcla8.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(8)).getName()));				
+				
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		
 		
 	}
+	
 
-	private void mezclarFotosTroceadas() {
-		if(fotos!=null) {
-			while (mezcla.size() < 10){
-				int n = (int) (Math.random()*9+0);
-				if(!mezcla.contains(fotos[n])) {
-					mezcla.add(fotos[n]);
-					System.out.println(fotos[n].getAbsolutePath());
-				}
-			}
-			mezcla.get(0).getAbsolutePath();
-			// Bindeos
-			mezcla1.imageProperty().set(new Image(mezcla.get(0).getAbsolutePath()));
-			}
+	/**
+	 * @author fede
+	 * Definicion: mezcla las fotos y actualiza los imgeViews, llamado "mezcla".
+	 * @throws IOException 
+	 */
+	private void mezcla() throws IOException {		
+		if (troceadas != null) {
+			while (mezcla.size() < 9) {
+				int n = (int) (Math.random() * 9 + 0);				
+				if (!mezcla.contains(n)) 					
+					mezcla.add(n);			
+			}				
+		}
 	}
 
 	@FXML

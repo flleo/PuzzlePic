@@ -37,7 +37,6 @@ public class PuzzlePicApp extends Application {
 		primaryStage.setTitle("PuzzlEpic");
 		primaryStage.getIcons().add(new Image("/dad/puzzlepic/resources/logo.png"));
 		primaryStage.setScene(scene);
-		primaryStage.initStyle(StageStyle.UTILITY);
 		primaryStage.show();
 
 	}

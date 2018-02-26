@@ -121,6 +121,7 @@ public class OpcionesPartidasController implements Initializable {
 
 	private void onAbrirButtonAction(ActionEvent e) {
 		try {
+		    
 			selectedDirectory.set(mainController.directorioChooser("Selecciona carpeta de imagenes", "."));
 			if (!selectedDirectory.get().isDirectory()) {
 				mainController.error("Error de seleeción", "Has de seleccionar una carpeta.", null);
@@ -179,8 +180,10 @@ public class OpcionesPartidasController implements Initializable {
 			switch (mainController.getControladorOpciones().getComboGame().getValue()) {
 			case PUZZLE_PIECES:
 				System.out.println("PUZLE PIECES");
-				PuzzlePiecesController c = new PuzzlePiecesController(mainController);
-				mainController.getVista().setCenter(c.getView());
+				mainController.getVista().setCenter(mainController.getControladorPuzzlePieces().getView());
+				mainController.getControladorPuzzlePieces().rescatarTroceadas();
+				mainController.getControladorPuzzlePieces().mezcla();
+				mainController.getControladorPuzzlePieces().bindeaMezcla();
 				break;
 			case MATCH_PUZZLE:
 				System.out.println("MATCH PUZZLE");
@@ -200,7 +203,8 @@ public class OpcionesPartidasController implements Initializable {
 
 	
 	private void seleccionarFoto() {
-		File[] fotos = selectedDirectory.get().listFiles();
+		File[] fotos = new File[9];
+		fotos = selectedDirectory.get().listFiles();
 		int size = fotos.length;
 		int seleccionada = (int) (Math.random() * size + 0);
 		foto = fotos[seleccionada];

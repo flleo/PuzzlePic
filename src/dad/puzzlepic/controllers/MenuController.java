@@ -129,7 +129,7 @@ public class MenuController implements Initializable {
 		Dialog<Void> dialog = new Dialog<>();
 		dialog.setTitle("About...");
 		dialog.initOwner(primaryStage);
-		dialog.setContentText("Equipo de desarrollo:\n" + "Federico Lleó\n" + "Isaac Méndez\n" + "Domingo Rodríguez");
+		dialog.setContentText("Equipo de desarrollo:\n" + "Federico Lleó\n" + "Isaac Méndez\n");
 		dialog.setGraphic(new ImageView(getClass().getResource("/dad/puzzlepic/resources/team.png").toExternalForm()));
 		ButtonType ok = new ButtonType("OK", ButtonData.CANCEL_CLOSE);
 		dialog.getDialogPane().getButtonTypes().add(ok);

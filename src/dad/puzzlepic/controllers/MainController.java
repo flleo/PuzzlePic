@@ -60,7 +60,7 @@ public class MainController implements Initializable {
 		controladorMarcador = new MarcadorController();
 		controladorMenu = new MenuController(this);
 		controladorOpciones = new OpcionesPartidasController(this);
-		//controladorPuzzlePieces = new PuzzlePiecesController(this);
+		controladorPuzzlePieces = new PuzzlePiecesController(this);
 		matchPuzzleController = new MatchPuzzleController(this);
 		slidingPuzzleController = new SlidingPuzzleController(this);
 		

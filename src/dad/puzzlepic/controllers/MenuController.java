@@ -25,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import dad.puzzlepic.controllers.MarcadorController;
 import dad.puzzlepic.controllers.OpcionesPartidasController;
 import dad.puzzlepic.controllers.MainController;
@@ -53,8 +54,9 @@ public class MenuController implements Initializable {
 	//
 
 	private MainController mainController;
-
 	private Stage primaryStage;
+	
+	//
 
 	public MenuController(MainController mainController) throws IOException {
 		this.mainController = mainController;
@@ -75,10 +77,11 @@ public class MenuController implements Initializable {
 		themeButton.setOnAction(e -> onTemaButtonAction(e));
 		marcadorButton.setOnAction(e -> onMarcadorButtonAction(e));
 		aboutButton.setOnAction(e -> onAboutButtonAction(e));
-		exitButton.setOnAction(e -> onSalirButtonAction(e));
 		soundButton.setOnAction(e -> onSonidoButtonAction(e));
-
+		exitButton.setOnAction(e -> onSalirButtonAction(e));
+		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 	}
+
 
 	private void onJugarButtonAction(ActionEvent e) {
 		mainController.getVista().setCenter(mainController.getControladorOpciones().getView());

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -29,9 +30,11 @@ public class SlidingPuzzleController implements Initializable {
 	//
 
 	private MainController mainController;
+	private Stage primaryStage;
 
 	public SlidingPuzzleController(MainController mainController) throws IOException {
 		this.mainController = mainController;
+		this.primaryStage = PuzzlePicApp.getPrimaryStage();
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/SlidingPuzzleView.fxml"));
 		loader.setController(this);
@@ -42,7 +45,7 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 	}
 
 	@FXML

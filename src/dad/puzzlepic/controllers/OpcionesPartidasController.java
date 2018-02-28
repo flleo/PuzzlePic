@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import dad.puzzlepic.models.Dificultad;
 import dad.puzzlepic.models.Jugador;
 import dad.puzzlepic.models.Modo;
 import dad.puzzlepic.models.TroceadorImagenes;
+import dad.puzzlepic.views.PuzzlePicApp;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -30,6 +32,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class OpcionesPartidasController implements Initializable {
 
@@ -65,16 +68,21 @@ public class OpcionesPartidasController implements Initializable {
 
 	//
 
-	private ObjectProperty<File> selectedDirectory = new SimpleObjectProperty<>();
+	private PuzzlePiecesController puzzlePiecesController;
+	private ObjectProperty <File> selectedDirectory = new SimpleObjectProperty<>();
 	private MainController mainController;
 	private TroceadorImagenes troceadorImagenes = new TroceadorImagenes();
-	private Jugador jugador = new Jugador();
-	private File foto;
+	private Jugador jugador;
+	private File foto = null;
 	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
-	
+	private Stage primaryStage;
+	private ArrayList<File> fotos = new ArrayList<>();
 
 	public OpcionesPartidasController(MainController mainController) throws IOException {
 		this.mainController = mainController;
+		this.primaryStage = PuzzlePicApp.getPrimaryStage();
+		this.jugador = mainController.getJugador();
+		
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/OpcionesPartidasView.fxml"));
 		loader.setController(this);
@@ -103,14 +111,13 @@ public class OpcionesPartidasController implements Initializable {
 
 		// Acciones
 		backButton.setOnAction(e -> onVolverMenuButtonAction(e));
-		continueButton.setOnAction(e -> {
-			try {
-				onIniciarPartidaButtonAction(e);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		});
+		continueButton.setOnAction(e -> {try {
+			onIniciarPartidaButtonAction(e);
+		} catch (IOException e1) {
+			mainController.error("PuzzlePic", "La foto introducida no es válida", e1);			
+		}});
 		openButton.setOnAction(e -> onAbrirButtonAction(e));
+		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 
 	}
 
@@ -139,7 +146,7 @@ public class OpcionesPartidasController implements Initializable {
 		
 	}
 */
-	private void onIniciarPartidaButtonAction(ActionEvent e) throws IOException  {
+	private void onIniciarPartidaButtonAction(ActionEvent e) throws IOException   {
 		if (jugador.getNombre().equals("") || selectedDirectory.get().getName().equals("")) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error!!");
@@ -151,25 +158,24 @@ public class OpcionesPartidasController implements Initializable {
 
 		} else {
 			seleccionarFoto();
-		
 			
 				switch (lvlCombo.getValue()) {
 
 				case FACIL:
 					System.out.println("FACIL");
-					mainController.vaciaDirectorio(directorioTroceadas);
-					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 3));
+					mainController.vaciaDirectorioTroceadas();
+					mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
 					break;
 					
 				case MEDIA:
-					mainController.vaciaDirectorio(directorioTroceadas);
-					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 6));
-					break;
+					mainController.vaciaDirectorioTroceadas();
+					mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
+				break;
 
 				case DIFICIL:
-					mainController.vaciaDirectorio(directorioTroceadas);
-					mainController.setFotos(troceadorImagenes.trocearFoto(foto, 9));
-					break;
+					mainController.vaciaDirectorioTroceadas();
+					mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
+				break;
 
 				default:
 					break;
@@ -180,10 +186,11 @@ public class OpcionesPartidasController implements Initializable {
 			switch (mainController.getControladorOpciones().getComboGame().getValue()) {
 			case PUZZLE_PIECES:
 				System.out.println("PUZLE PIECES");
-				mainController.getVista().setCenter(mainController.getControladorPuzzlePieces().getView());
-				mainController.getControladorPuzzlePieces().rescatarTroceadas();
-				mainController.getControladorPuzzlePieces().mezcla();
-				mainController.getControladorPuzzlePieces().bindeaMezcla();
+				puzzlePiecesController = new PuzzlePiecesController(mainController);
+				puzzlePiecesController.rescatarTroceadas();
+				puzzlePiecesController.mezcla();
+				puzzlePiecesController.bindeaMezcla();
+				mainController.getVista().setCenter(puzzlePiecesController.getView());
 				break;
 			case MATCH_PUZZLE:
 				System.out.println("MATCH PUZZLE");
@@ -202,12 +209,15 @@ public class OpcionesPartidasController implements Initializable {
 	}
 
 	
-	private void seleccionarFoto() {
-		File[] fotos = new File[9];
-		fotos = selectedDirectory.get().listFiles();
-		int size = fotos.length;
+	private void seleccionarFoto()  {
+	    for (File file : selectedDirectory.get().listFiles()) {
+			fotos.add(file);
+		}
+		int size = fotos.size();
 		int seleccionada = (int) (Math.random() * size + 0);
-		foto = fotos[seleccionada];
+		foto = fotos.get(seleccionada);
+		System.out.println(foto.getName()+"seleccionarfoto opcione...Cantidad de fotos en carpeta:"+fotos.size());
+
 	}
 
 	public BorderPane getView() {
@@ -266,4 +276,14 @@ public class OpcionesPartidasController implements Initializable {
 		this.selectedDirectoryProperty().set(selectedDirectory);
 	}
 
+	public ArrayList<File> getFotos() {
+		return fotos;
+	}
+
+	public File getFoto() {
+		return foto;
+	}
+
+	
+	
 }

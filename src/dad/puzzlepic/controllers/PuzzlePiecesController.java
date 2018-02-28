@@ -8,6 +8,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import dad.puzzlepic.models.Jugador;
+import dad.puzzlepic.models.TroceadorImagenes;
 import dad.puzzlepic.views.PuzzlePicApp;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -26,6 +30,8 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.transform.TransformChangedEvent;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -97,21 +103,25 @@ public class PuzzlePiecesController implements Initializable {
     @FXML
     private ImageView mifoto8;
 
-
+    @FXML
+    private Label label_player,label_ronda,label_tiempo;
 	//
 
+
 	private MainController mainController;
-	private ArrayList<File> mifotos = new ArrayList<>();	
+	private TroceadorImagenes troceadorImagenes = new TroceadorImagenes();
 	private ArrayList<File> troceadas = new ArrayList<>();
     private ArrayList<Integer> mezcla = new ArrayList<>();
-
-	
-
 	private ImageView mifotoClicked=new ImageView(),mezclaClicked;
-
 	private ImageView cambioImagen= new ImageView();
-
 	private int aciertos;
+	private Jugador jugador;
+	private Stage primaryStage;
+	private ArrayList<File> fotos = new ArrayList<>();
+	private int ganadas;
+	private File foto;
+	private int size ;
+	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
 	/**
 	 * @author fede
 	 * @param mainController 
@@ -120,7 +130,8 @@ public class PuzzlePiecesController implements Initializable {
 	 */
 	public PuzzlePiecesController(MainController mainController) throws IOException {
 		this.mainController = mainController;	
-		
+		this.jugador  = mainController.getJugador();
+		this.primaryStage = PuzzlePicApp.getPrimaryStage();
 	
 		//System.out.println(troceadas.length+"cantidad ppcontroller");
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/PuzzlePiecesView.fxml"));
@@ -136,15 +147,41 @@ public class PuzzlePiecesController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	
+		foto = mainController.getOpcionesPartidasController().getFoto();
+    	fotos = mainController.getOpcionesPartidasController().getFotos();
 		
+		//Bindeos etiquetas
+		label_player.textProperty().bind(jugador.nombreProperty());
+		label_tiempo.textProperty().bind(jugador.tiempoProperty().asString());
+		label_ronda.textProperty().bind(jugador.rondasProperty().asString());
 		
+		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 	}
 	
-	public void rescatarTroceadas() {
-		for (File file : mainController.getFotos()) {
-			this.troceadas.add(file);
-		}
+	
+	
+	private void receteaMiFoto() {
+		mifoto0.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));				
+		mifoto1.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto2.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto3.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto4.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto5.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto6.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto7.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
+		mifoto8.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg"));	
 		
+	}
+	/**
+	 * @author fede
+	 * rescatamos la foto con uan nueva variacion de troceadas
+	 */
+	public void rescatarTroceadas() {
+		aciertos=0;
+		receteaMiFoto();
+		troceadas.clear();
+		for (File file : mainController.getFotosTroceadas()) 
+			this.troceadas.add(file);
 	}
 	/**
 	 * @author fede
@@ -173,7 +210,9 @@ public class PuzzlePiecesController implements Initializable {
 		mezcla6.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(6)).getName()));				
 		mezcla7.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(7)).getName()));				
 		mezcla8.setImage(new Image("dad/puzzlepic/resources/troceadas/"+ troceadas.get(mezcla.get(8)).getName()));				
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			mainController.advertencia("PuzzlePic", "No se ha podido cargar la foto, " + foto.getName(), "Pasa a la siguiente.");
+		}
 	}
 	
 
@@ -209,15 +248,43 @@ public class PuzzlePiecesController implements Initializable {
     		System.out.println(idS + "=" + troceadas.get(idI).getName().substring(0, 1));
     		//Si coincide validamos la mezcla y desabilitamos la imagen correcta
     		mezclaClicked.setImage(new Image("dad/puzzlepic/resources/ok.png"));
+    		mezclaClicked.setDisable(true);
     		mifotoClicked.setDisable(true);
     		aciertos++;
+    		if(aciertos==9) ganadas++;
     		
     			
     	}
     	
     }
+    
+    private void seleccionaFoto() {
+		fotos.remove(foto);
+		size = fotos.size();
+		if(size!=0) {
+		int seleccionada = (int) (Math.random() * size + 0);
+		foto = fotos.get(seleccionada);
+		} else {
+			mainController.advertencia("PuzzlePic", "Has completado todas las fotos", "Vuelve a seleccionar carpeta");
+		}
+    }
 	
-  
+    @FXML
+    void siguienteOnAction(ActionEvent event) {   	    
+		
+		try {
+			mainController.vaciaDirectorioTroceadas();
+			seleccionaFoto();
+			mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
+			rescatarTroceadas();
+			mezcla();
+			bindeaMezcla();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    }
     
 	@FXML
 	void abandonarOnAction(ActionEvent event) {

@@ -16,7 +16,7 @@ import javafx.stage.StageStyle;
 public class PuzzlePicApp extends Application {
 
 
-	public PuzzlePiecesController tableroFacilController;
+	
 	public static Scene scene;
 	private MainController controlador;
 	private static Stage primaryStage;

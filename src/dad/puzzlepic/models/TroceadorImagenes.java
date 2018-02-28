@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -12,7 +13,7 @@ public class TroceadorImagenes {
 	
 	
 
-	public File[] trocearFoto(File file, int nivel) throws IOException {       
+	public ArrayList<File> trocearFoto(File file, int nivel) throws IOException {       
         FileInputStream fis = new FileInputStream(file);
         BufferedImage image = ImageIO.read(fis); //reading the image file
 
@@ -36,11 +37,11 @@ public class TroceadorImagenes {
             }
         }
         System.out.println("Splitting done");
-        File[] fotos = new File[rows*cols];
+        ArrayList<File> fotos = new ArrayList<>();
         //Writing mini images into image files
         for (int i = 0; i < imgs.length; i++) {
-        	fotos[i] = new File("src/dad/puzzlepic/resources/troceadas/" + i + file.getName());
-            ImageIO.write(imgs[i], "jpg", fotos[i]);
+        	fotos.add(new File("src/dad/puzzlepic/resources/troceadas/" + i + file.getName()));
+            ImageIO.write(imgs[i], "jpg", fotos.get(i));
         }
         System.out.println("Mini images created");
         

@@ -5,10 +5,12 @@ import java.io.File;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dad.puzzlepic.views.PuzzlePicApp;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -18,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.AudioClip;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.FileChooser.ExtensionFilter;
 import dad.puzzlepic.controllers.MarcadorController;
 import dad.puzzlepic.controllers.MenuController;
@@ -25,6 +28,7 @@ import dad.puzzlepic.controllers.OpcionesPartidasController;
 import dad.puzzlepic.controllers.PuzzlePiecesController;
 import dad.puzzlepic.models.Jugador;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * 
@@ -35,18 +39,19 @@ import javafx.stage.Stage;
 public class MainController implements Initializable {
 
 	private BorderPane vista;
-
 	private MenuController controladorMenu;
 	private MarcadorController controladorMarcador;
-	private OpcionesPartidasController controladorOpciones;
-	private PuzzlePiecesController controladorPuzzlePieces;
+	private OpcionesPartidasController opcionesPartidasController;
+	//private PuzzlePiecesController puzzlePiecesController;
 	private MatchPuzzleController matchPuzzleController;
 	private SlidingPuzzleController slidingPuzzleController;
 	private AudioClip audio;
 	private Jugador jugador = new Jugador();
 	private Stage primaryStage;
-	private File[] fotos = null;
-	
+	private ArrayList<File> fotosTroceadas = new ArrayList<>();
+	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
+	private int aciertos;
+	private ArrayList<File> troceadas;
 
 	/**
 	 * 
@@ -57,16 +62,29 @@ public class MainController implements Initializable {
 
 		primaryStage = PuzzlePicApp.getPrimaryStage();
 		vista = new BorderPane();
-		controladorMarcador = new MarcadorController();
+		controladorMarcador = new MarcadorController(this);
 		controladorMenu = new MenuController(this);
-		controladorOpciones = new OpcionesPartidasController(this);
-		controladorPuzzlePieces = new PuzzlePiecesController(this);
+		opcionesPartidasController = new OpcionesPartidasController(this);
 		matchPuzzleController = new MatchPuzzleController(this);
 		slidingPuzzleController = new SlidingPuzzleController(this);
-		
+		primaryStage.setOnCloseRequest(e->onSalirAction(e));
 
 		initialize(null, null);
 
+	}
+
+	public void onSalirAction(WindowEvent e) {
+		Alert alertExit = new Alert(AlertType.CONFIRMATION);
+		alertExit.setTitle("PuzzlePic");
+		alertExit.setHeaderText("Saliendo de PuzzlePic");
+		alertExit.initOwner(PuzzlePicApp.getPrimaryStage());
+		alertExit.initModality(Modality.APPLICATION_MODAL);
+		alertExit.setContentText("¿Seguro que quiere salir?");
+
+		Optional<ButtonType> result = alertExit.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Platform.exit();
+		} else { e.consume();}
 	}
 
 	@Override
@@ -94,9 +112,9 @@ public class MainController implements Initializable {
 	 * @author fede
 	 * @param directorio
 	 */
-	public void vaciaDirectorio(File directorio) {
-		for (File listFile : directorio.listFiles()) 
-		listFile.delete();
+	public void vaciaDirectorioTroceadas() {
+		for (File listFile : directorioTroceadas.listFiles())
+			listFile.delete();
 	}
 
 
@@ -198,13 +216,10 @@ public class MainController implements Initializable {
 	}
 
 	public OpcionesPartidasController getControladorOpciones() {
-		return controladorOpciones;
+		return opcionesPartidasController;
 	}
 
-	public PuzzlePiecesController getControladorPuzzlePieces() {
-		return controladorPuzzlePieces;
-	}
-	
+
 	
 
 	public MatchPuzzleController getMatchPuzzleController() {
@@ -245,13 +260,20 @@ public class MainController implements Initializable {
 		this.vista = vista;
 	}
 
-	public File[] getFotos() {
-		return fotos;
+	
+	public OpcionesPartidasController getOpcionesPartidasController() {
+		return opcionesPartidasController;
 	}
 
-	public void setFotos(File[] fotos) {
-		this.fotos = fotos;
+	public ArrayList<File> getFotosTroceadas() {
+		return fotosTroceadas;
 	}
+
+	public void setFotosTroceadas(ArrayList<File> fotosTroceadas) {
+		this.fotosTroceadas = fotosTroceadas;
+	}
+
+	
 
 	
 

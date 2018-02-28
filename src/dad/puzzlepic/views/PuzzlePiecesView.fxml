@@ -16,9 +16,10 @@
 
 <BorderPane fx:id="view" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <HBox prefHeight="31.0" prefWidth="654.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="31.0" prefWidth="654.0" spacing="350.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#abandonarOnAction" text="Abandonar" textFill="#c31b31" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#siguienteOnAction" text="Siguiente" textFill="#109706" />
          </children>
       </HBox>
    </bottom>
@@ -30,29 +31,24 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <HBox prefHeight="40.0" prefWidth="634.0" spacing="80.0">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="634.0" spacing="80.0">
                <children>
-                  <Label prefHeight="37.0" prefWidth="108.0" text="PuzzlePic" HBox.hgrow="SOMETIMES">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Jugador" />
-                        <Label text="Player 1" />
+                        <Label fx:id="label_player" text="Label" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Tiempo" />
-                        <Label text="0:00" />
+                        <Label fx:id="label_tiempo" text="0:00" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Ronda" />
-                        <Label text="1" />
+                        <Label fx:id="label_ronda" text="1" />
                      </children>
                   </VBox>
                </children>
@@ -77,47 +73,47 @@
                   <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="mezcla0" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="mezcla0" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla1" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="mezcla1" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla2" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="mezcla2" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla3" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="mezcla3" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla4" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ImageView fx:id="mezcla4" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla5" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="mezcla5" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla6" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="mezcla6" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla7" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <ImageView fx:id="mezcla7" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mezcla8" fitHeight="95.0" fitWidth="92.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <ImageView fx:id="mezcla8" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mezclaClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
@@ -137,9 +133,9 @@
             <Label alignment="CENTER" text="Mi foto" />
             <GridPane fx:id="mifoto" maxHeight="300.0" maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="111.0" minWidth="10.0" prefWidth="105.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="105.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -147,47 +143,47 @@
                   <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="mifoto0" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="mifoto0" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto1" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="mifoto1" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto2" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="mifoto2" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto3" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                  <ImageView fx:id="mifoto3" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto4" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ImageView fx:id="mifoto4" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto5" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="mifoto5" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto6" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                  <ImageView fx:id="mifoto6" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto7" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <ImageView fx:id="mifoto7" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mifoto8" fitWidth="100.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <ImageView fx:id="mifoto8" fitHeight="95.0" fitWidth="95.0" nodeOrientation="INHERIT" onMouseClicked="#mifotoClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <image>
                         <Image url="@../resources/interrogation.jpg" />
                      </image>

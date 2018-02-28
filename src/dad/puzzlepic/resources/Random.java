@@ -1,6 +1,6 @@
-package dad.puzzlepic.controllers;
+package dad.puzzlepic.resources;
 
-public class random {
+public class Random {
 
 	public static void main(String[] args) {
 		

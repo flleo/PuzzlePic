@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import dad.puzzlepic.models.Dificultad;
 import dad.puzzlepic.models.Modo;
+import dad.puzzlepic.views.PuzzlePicApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 
 public class MarcadorController implements Initializable {
@@ -51,7 +53,15 @@ public class MarcadorController implements Initializable {
     @FXML
     private TableColumn<?, ?> puntuacionColumn;
 
-	public MarcadorController() throws IOException {
+    //
+    
+    private MainController mainController;
+    private Stage primaryStage;
+    
+	public MarcadorController(MainController mainController) throws IOException {
+		this.mainController = mainController;
+		this.primaryStage = PuzzlePicApp.getPrimaryStage();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/MarcadorView.fxml"));
 		loader.setController(this);
 		loader.load();
@@ -61,7 +71,7 @@ public class MarcadorController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-
+		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 	}
 
 	public BorderPane getView() {

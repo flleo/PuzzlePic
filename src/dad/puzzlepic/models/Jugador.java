@@ -19,12 +19,12 @@ public class Jugador {
 	private IntegerProperty rondas;
 
 	public Jugador() {
-		nombre = new SimpleStringProperty();
-		dificultad = new SimpleObjectProperty<>();
-		directorio = new SimpleObjectProperty<>();
-		modo = new SimpleObjectProperty<>();
-		tiempo = new SimpleIntegerProperty();
-		rondas = new SimpleIntegerProperty();
+		nombre = new SimpleStringProperty(this, "nombre");
+		dificultad = new SimpleObjectProperty<>(this, "dificultad");
+		directorio = new SimpleObjectProperty<>(this, "directorio");
+		modo = new SimpleObjectProperty<>(this, "modo");
+		tiempo = new SimpleIntegerProperty(this, "tiempo");
+		rondas = new SimpleIntegerProperty(this, "rondas");
 	}
 
 	public final StringProperty nombreProperty() {

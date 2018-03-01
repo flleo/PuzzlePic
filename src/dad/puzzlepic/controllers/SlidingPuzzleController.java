@@ -17,15 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
-=======
-
-import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -95,12 +89,7 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-<<<<<<< HEAD
 
-		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
-
-		
-=======
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
 
 		playerLabel.textProperty().bind(jugador.nombreProperty());
@@ -110,7 +99,6 @@ public class SlidingPuzzleController implements Initializable {
 		foto = mainController.getOpcionesPartidasController().getFoto();
 		piezasList = mainController.getOpcionesPartidasController().getFotos();
 
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
 	}
 
 	public void rescatarTroceadas() {
@@ -163,10 +151,7 @@ public class SlidingPuzzleController implements Initializable {
 			mainController.advertencia("PuzzlePic", "No se ha podido cargar la foto, " + foto.getName(),
 					"Pasa a la siguiente.");
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
 	}
 
 	@FXML

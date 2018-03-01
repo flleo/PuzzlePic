@@ -16,11 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
 import javafx.stage.Stage;
-=======
 import javafx.scene.layout.GridPane;
->>>>>>> 161938a1fce0b970af1ed228faa8351b4b96262c
+
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -83,9 +81,9 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-<<<<<<< HEAD
+
 		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
-=======
+
 		
 	}
 
@@ -127,7 +125,7 @@ public class SlidingPuzzleController implements Initializable {
 			pieza22.setImage(new Image("dad/puzzlepic/resources/troceadas/" + troceadas.get(mezcla.get(8)).getName()));
 		} catch (Exception e) {
 		}
->>>>>>> 161938a1fce0b970af1ed228faa8351b4b96262c
+
 	}
 	
 

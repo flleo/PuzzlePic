@@ -22,6 +22,32 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+     <groupId>com.zenjava</groupId>
+     <artifactId>javafx-maven-plugin</artifactId>
+     <version>8.6.0</version>
+     <configuration>
+         <appName>PuzzlEpic</appName>
+         <mainClass>dad.puzzlepic.views.PuzzlePicApp</mainClass>
+         <vendor>Fran Vargas</vendor>
+     </configuration>
+     <executions>
+         <execution>
+             <id>create-jfxjar</id>
+             <phase>package</phase>
+             <goals>
+                 <goal>build-jar</goal>
+             </goals>
+         </execution>
+         <execution>
+             <id>create-native</id>
+             <phase>package</phase>
+             <goals>
+                 <goal>build-native</goal>
+             </goals>
+         </execution>
+     </executions>
+ </plugin>
     </plugins>
   </build>
 </project>

@@ -29,7 +29,7 @@
      <configuration>
          <appName>PuzzlEpic</appName>
          <mainClass>dad.puzzlepic.views.PuzzlePicApp</mainClass>
-         <vendor>Fran Vargas</vendor>
+         <vendor>Isaac Méndez y Federico Lleó</vendor>
      </configuration>
      <executions>
          <execution>

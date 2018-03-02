@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: src\docs/imagenes
+---
+
 # PuzzlePic
 
 Bienvenidos a **PuzzlePic**,
@@ -15,3 +19,5 @@ El objetivo es completar los rompecabezas en el menor tiempo posible.
 Saber más sobre el Diseño: https://github.com/flleo/PuzzlePic/blob/master/docs/diseno.md
 
 Para saber más sobre la Funcionalidad: https://github.com/flleo/PuzzlePic/blob/master/docs/analisis.md
+
+![logo_index](src/dad/puzzlepic/resources/logo_index.png)

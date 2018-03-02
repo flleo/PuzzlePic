@@ -1,5 +1,6 @@
 ---
 typora-root-url: imagenes
+typora-copy-images-to: imagenes
 ---
 
 # Diseño

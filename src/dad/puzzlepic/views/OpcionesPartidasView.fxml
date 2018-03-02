@@ -62,7 +62,7 @@
       <HBox alignment="BOTTOM_RIGHT" spacing="10.0" BorderPane.alignment="TOP_LEFT">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" text="Atrás" />
-            <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#onContinueButtonAction" text="Continuar" />
+            <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#onIniciarPartidaButtonAction" text="Continuar" />
          </children>
          <BorderPane.margin>
             <Insets />

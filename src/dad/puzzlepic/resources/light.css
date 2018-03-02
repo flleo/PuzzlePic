@@ -2,6 +2,13 @@
 	-fx-background-color: lightslategray;
 	-fx-text-fill: lightyellow ;
 }
+
+.label{
+	-fx-font-size: 12pt;
+	-fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
 .button{
 	-fx-font-weight: bold;
 	-fx-background-color: lightskyblue;

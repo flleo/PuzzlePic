@@ -1,6 +1,11 @@
 .root{
 	-fx-background-color: orange ;
 }
+.label{
+	-fx-font-size: 12pt;
+	-fx-text-fill: black;
+    -fx-font-weight: bold;
+}
 .button{
 	-fx-background-color: darkgreen;
 	-fx-font-size: 15pt;

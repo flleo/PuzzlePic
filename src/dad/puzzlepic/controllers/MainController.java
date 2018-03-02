@@ -51,7 +51,8 @@ public class MainController implements Initializable {
 	private ArrayList<File> fotosTroceadas = new ArrayList<>();
 	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
 	private int aciertos;
-	 private ArrayList<Integer> aleatorio = new ArrayList<>();
+	private ArrayList<Integer> aleatorio = new ArrayList<>();
+	private ArrayList<Integer> puntuaciones = new ArrayList<>();
 
 	/**
 	 * 
@@ -289,6 +290,14 @@ public class MainController implements Initializable {
 
 	public ArrayList<Integer> getAleatorio() {
 		return aleatorio;
+	}
+
+	public ArrayList<Integer> getPuntuaciones() {
+		return puntuaciones;
+	}
+
+	public void setPuntuaciones(ArrayList<Integer> puntuaciones) {
+		this.puntuaciones = puntuaciones;
 	}
 
 	

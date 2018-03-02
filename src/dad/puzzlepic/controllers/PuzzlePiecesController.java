@@ -176,7 +176,9 @@ public class PuzzlePiecesController  implements Initializable {
 	
 	
 	
-	
+	/**
+	 * @author fede
+	 */
 	private void receteaMiFoto() {
 		
 				
@@ -199,21 +201,47 @@ public class PuzzlePiecesController  implements Initializable {
 		
 	}
 	
-
+	/**
+	 * @author fede
+	 */
 	private void nuevoMarcador() {
+		
 		marcador = new Marcador();
 		marcador.setFoto(foto.getName());
 		marcador.setPuntuacion(String.valueOf(partida.getPuntuacion()));
 		marcador.setNombre(jugador.getNombre());			
-		marcador.setPuesto(calculaPuesto());
 		marcador.setTiempo(String.valueOf(partida.getTiempo()));
+		marcador.setPuesto("1");
 		marcadorController.marcadoresProperty().add(marcador);
+		calculaPuestoYActualizaValores(marcador);
+	}
+	/**
+	 * @author fede
+	 * @return
+	 */
+	private void calculaPuestoYActualizaValores(Marcador marcador) {
+		ArrayList<Marcador> marcadores1  =new ArrayList<>();
+		ArrayList<Marcador> marcadores0 = new ArrayList<>();
+		for (Marcador marca : marcadorController.marcadoresProperty()) 
+			marcadores0.add(marca);
+		marcadores0.add(marcador);
+		int max=1000;
+		for (int i = 0; i < marcadores0.size(); i++) {
+			if(Integer.parseInt(marcadores0.get(i).getPuntuacion()) < max) {
+				max = Integer.parseInt(marcadores0.get(i).getPuntuacion());
+				marcadores1.add(marcadores0.get(i));
+				marcadores1.get(i).setPuesto(String.valueOf(i+1));
+			}
+		}
+		marcadorController.marcadoresProperty().clear();
+		for (int i = 0; i < marcadores1.size(); i++) {
+			marcadorController.marcadoresProperty().add(marcadores1.get(i));	
+			}
 		
 	}
-	private String calculaPuesto() {
-		// TODO Auto-generated method stub
-		return "1";
-	}
+	/**
+	 * @author fede
+	 */
 	public void bindeaMezcla() {
 		aleatorio = mainController.getAleatorio();
 	    fotosTroceadas = mainController.getFotosTroceadas();
@@ -233,7 +261,10 @@ public class PuzzlePiecesController  implements Initializable {
 		}
 	}
 	
-
+	/**
+	 * @author fede
+	 * @param event
+	 */
     @FXML
     void mezclaClick(MouseEvent event) { 
    	    mezclaClicked = (ImageView) event.getSource();
@@ -282,7 +313,9 @@ public class PuzzlePiecesController  implements Initializable {
     	}
     	
     }
-    
+    /**
+     * @author fede
+     */
     private void seleccionaFoto() {
 		fotos.remove(foto);
 		size = fotos.size();

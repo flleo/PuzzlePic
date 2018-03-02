@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -62,7 +62,7 @@
       <HBox alignment="BOTTOM_RIGHT" spacing="10.0" BorderPane.alignment="TOP_LEFT">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" text="Atrás" />
-            <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" text="Continuar" />
+            <Button fx:id="continueButton" defaultButton="true" mnemonicParsing="false" onAction="#onContinueButtonAction" text="Continuar" />
          </children>
          <BorderPane.margin>
             <Insets />

@@ -51,7 +51,7 @@ public class MainController implements Initializable {
 	private ArrayList<File> fotosTroceadas = new ArrayList<>();
 	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
 	private int aciertos;
-	private ArrayList<File> troceadas;
+	 private ArrayList<Integer> aleatorio = new ArrayList<>();
 
 	/**
 	 * 
@@ -117,7 +117,21 @@ public class MainController implements Initializable {
 			listFile.delete();
 	}
 
-
+	/**
+	 * @author fede
+	 * Definicion: mezcla las fotos y actualiza los imgeViews, llamado "mezcla".
+	 * @throws IOException 
+	 */
+	public void aleatorio() throws IOException {		
+		if (fotosTroceadas != null) {
+			aleatorio.clear();
+			while (aleatorio.size() < 9) {
+				int n = (int) (Math.random() * 9 + 0);				
+				if (!aleatorio.contains(n)) 					
+					aleatorio.add(n);			
+			}				
+		}
+	}
 	/**
 	 * 
 	 * @param title
@@ -271,6 +285,10 @@ public class MainController implements Initializable {
 
 	public void setFotosTroceadas(ArrayList<File> fotosTroceadas) {
 		this.fotosTroceadas = fotosTroceadas;
+	}
+
+	public ArrayList<Integer> getAleatorio() {
+		return aleatorio;
 	}
 
 	

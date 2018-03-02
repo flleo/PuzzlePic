@@ -9,11 +9,18 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author fede,internet
+ *
+ */
 public class TroceadorImagenes {
 	
-	
 
-	public ArrayList<File> trocearFoto(File file, int nivel) throws IOException {       
+	public ArrayList<File> trocearFoto(File file, int nivel) throws IOException { 
+		ArrayList<File> fotos = new ArrayList<>();
+	
+		if(file!=null) {
         FileInputStream fis = new FileInputStream(file);
         BufferedImage image = ImageIO.read(fis); //reading the image file
 
@@ -37,14 +44,14 @@ public class TroceadorImagenes {
             }
         }
         System.out.println("Splitting done");
-        ArrayList<File> fotos = new ArrayList<>();
+        
         //Writing mini images into image files
         for (int i = 0; i < imgs.length; i++) {
         	fotos.add(new File("src/dad/puzzlepic/resources/troceadas/" + i + file.getName()));
             ImageIO.write(imgs[i], "jpg", fotos.get(i));
         }
         System.out.println("Mini images created");
-        
+		}
         return fotos;
 	}
 }

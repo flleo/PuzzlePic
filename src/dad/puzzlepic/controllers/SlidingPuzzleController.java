@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import dad.puzzlepic.models.Jugador;
+import dad.puzzlepic.models.Marcador;
+import dad.puzzlepic.models.Partida;
+import dad.puzzlepic.models.TroceadorImagenes;
 import dad.puzzlepic.views.PuzzlePicApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,15 +20,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
-import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
-
-=======
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
+
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -39,41 +39,56 @@ public class SlidingPuzzleController implements Initializable {
 	private BorderPane view;
 
 	@FXML
-	private Button abandonarButton;
+	private Label label_player;
 
 	@FXML
-	private GridPane puzzlePane;
+	private Label label_tiempo;
 
 	@FXML
-	private Button ceroceroButton, unoceroButton, dosceroButton;
+	private Label label_puntuacion;
 
 	@FXML
-	private Button cerounoButton, unounoButton, dosunoButton;
+	private ImageView pieza00;
 
 	@FXML
-	private Button cerodosButton, unodosButton, dosdosButton;
+	private ImageView pieza10;
 
 	@FXML
-	private ImageView pieza00, pieza10, pieza20;
+	private ImageView pieza20;
 
 	@FXML
-	private ImageView pieza01, pieza11, pieza21;
+	private ImageView pieza01;
 
 	@FXML
-	private ImageView pieza02, pieza12, pieza22;
+	private ImageView pieza11;
 
 	@FXML
-	private Label playerLabel, timeLabel, roundLabel;
+	private ImageView pieza21;
 
+	@FXML
+	private ImageView pieza02;
+
+	@FXML
+	private ImageView pieza12;
+
+	@FXML
+	private ImageView pieza22;
+
+	///
+
+	private ArrayList<File> fotos = new ArrayList<>();
 	private File foto;
-
+	private ArrayList<Integer> aleatorio = new ArrayList<>();
 	private ArrayList<File> piezasList = new ArrayList<>();
 	private ArrayList<File> troceadasList = new ArrayList<>();
 	private ArrayList<Integer> mezcladasList = new ArrayList<>();
-
+	private Marcador marcador = new Marcador();
+	private Partida partida = new Partida();
 	private Jugador jugador;
 	private MainController mainController;
 	private Stage primaryStage;
+	private TroceadorImagenes troceadorImagenes = new TroceadorImagenes();
+	private ArrayList<File> fotosTroceadas = new ArrayList<>();
 
 	/**
 	 * @param mainController
@@ -95,22 +110,19 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-<<<<<<< HEAD
 
-		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
-
-		
-=======
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
 
-		playerLabel.textProperty().bind(jugador.nombreProperty());
-		timeLabel.textProperty().bind(jugador.tiempoProperty().asString());
-		roundLabel.textProperty().bind(jugador.rondasProperty().asString());
+		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
+
+		// Bindeos etiquetas
+		label_player.textProperty().bind(jugador.nombreProperty());
+		label_tiempo.textProperty().bind(jugador.tiempoProperty().asString());
+		label_puntuacion.textProperty().bind(partida.puntuacionProperty().asString());
 
 		foto = mainController.getOpcionesPartidasController().getFoto();
 		piezasList = mainController.getOpcionesPartidasController().getFotos();
 
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
 	}
 
 	public void rescatarTroceadas() {
@@ -121,10 +133,74 @@ public class SlidingPuzzleController implements Initializable {
 	}
 
 	/**
-	 * @author Isaac
-	 * 
-	 * <tbody>Definicion: mezcla las fotos y actualiza los imgeViews
-	 *</tbody>
+	 * @author fede
+	 * @param event
+	 */
+	@FXML
+	void siguienteOnAction(ActionEvent event) {
+
+		try {
+			mainController.vaciaDirectorioTroceadas();
+			seleccionaFoto();
+			mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
+
+			aleatorio = mainController.getAleatorio();
+			bindeaMezcla();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * @author fede
+	 */
+	public void bindeaMezcla() {
+		aleatorio = mainController.getAleatorio();
+		fotosTroceadas = mainController.getFotosTroceadas();
+		System.out.println(foto.getName());
+		try {
+			pieza00.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(0)).getName()));
+			pieza01.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(1)).getName()));
+			pieza02.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(2)).getName()));
+			pieza10.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(3)).getName()));
+			pieza11.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(4)).getName()));
+			pieza12.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(5)).getName()));
+			pieza20.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(6)).getName()));
+			pieza21.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(7)).getName()));
+			pieza22.setImage(
+					new Image("dad/puzzlepic/resources/troceadas/" + fotosTroceadas.get(aleatorio.get(8)).getName()));
+		} catch (Exception e) {
+			mainController.advertencia("PuzzlePic", "No se ha podido cargar la foto, " + foto.getName(),
+					"Pasa a la siguiente.");
+		}
+	}
+
+	/**
+	 * @author fede
+	 */
+	private void seleccionaFoto() {
+		fotos.remove(foto);
+		int size = fotos.size();
+		if (size != 0) {
+			int seleccionada = (int) (Math.random() * size + 0);
+			foto = fotos.get(seleccionada);
+		} else {
+			mainController.advertencia("PuzzlePic", "Has completado todas las fotos", "Vuelve a seleccionar carpeta");
+		}
+	}
+
+	/**
+	 * @author fede
 	 * @throws IOException
 	 */
 	public void mezcla() throws IOException {
@@ -138,36 +214,7 @@ public class SlidingPuzzleController implements Initializable {
 		}
 	}
 
-	public void posicionarMezcladas() {
-		try {
-			// System.out.println(troceadas.get(mezcla.get(0)).getName());
-			pieza00.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(0)).getName()));
-			pieza01.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(1)).getName()));
-			pieza02.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(2)).getName()));
-			pieza10.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(3)).getName()));
-			pieza11.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(4)).getName()));
-			pieza12.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(5)).getName()));
-			pieza20.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(6)).getName()));
-			pieza21.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(7)).getName()));
-			pieza22.setImage(new Image(
-					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(8)).getName()));
-		} catch (Exception e) {
-			mainController.advertencia("PuzzlePic", "No se ha podido cargar la foto, " + foto.getName(),
-					"Pasa a la siguiente.");
-		}
-<<<<<<< HEAD
-
-=======
->>>>>>> 453066cca5f249c70605dfdeb38c0554585628aa
-	}
+	
 
 	@FXML
 	private void ceroCeroOnButtonAction(ActionEvent event) {
@@ -176,10 +223,7 @@ public class SlidingPuzzleController implements Initializable {
 		ImageView movImagen3 = pieza00;
 		ImageView movImagen4 = pieza10;
 
-		ceroceroButton.setGraphic(movImagen1);
-		cerounoButton.setGraphic(movImagen2);
-		unoceroButton.setGraphic(movImagen3);
-		unounoButton.setGraphic(movImagen4);
+		
 	}
 
 	@FXML
@@ -189,10 +233,7 @@ public class SlidingPuzzleController implements Initializable {
 		ImageView movImagen3 = pieza12;
 		ImageView movImagen4 = pieza02;
 
-		cerodosButton.setGraphic(movImagen3);
-		cerounoButton.setGraphic(movImagen4);
-		unounoButton.setGraphic(movImagen1);
-		unodosButton.setGraphic(movImagen2);
+	
 	}
 
 	@FXML
@@ -202,10 +243,7 @@ public class SlidingPuzzleController implements Initializable {
 		ImageView movImagen3 = pieza11;
 		ImageView movImagen4 = pieza10;
 
-		dosceroButton.setGraphic(movImagen4);
-		dosunoButton.setGraphic(movImagen1);
-		unoceroButton.setGraphic(movImagen3);
-		unounoButton.setGraphic(movImagen2);
+		
 	}
 
 	@FXML
@@ -215,10 +253,7 @@ public class SlidingPuzzleController implements Initializable {
 		ImageView movImagen3 = pieza11;
 		ImageView movImagen4 = pieza12;
 
-		dosdosButton.setGraphic(movImagen2);
-		dosunoButton.setGraphic(movImagen3);
-		unodosButton.setGraphic(movImagen1);
-		unounoButton.setGraphic(movImagen4);
+		
 	}
 
 	@FXML

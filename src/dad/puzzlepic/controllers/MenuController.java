@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,7 @@ public class MenuController implements Initializable {
 
 	private MainController mainController;
 	private Stage primaryStage;
-	
+
 	//
 
 	public MenuController(MainController mainController) throws IOException {
@@ -66,8 +67,8 @@ public class MenuController implements Initializable {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dad/puzzlepic/views/MenuView.fxml"));
 		loader.setController(this);
 		loader.load();
-		
-		initialize(null,null);
+
+		initialize(null, null);
 
 	}
 
@@ -79,9 +80,8 @@ public class MenuController implements Initializable {
 		aboutButton.setOnAction(e -> onAboutButtonAction(e));
 		soundButton.setOnAction(e -> onSonidoButtonAction(e));
 		exitButton.setOnAction(e -> onSalirButtonAction(e));
-		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
+		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
 	}
-
 
 	private void onJugarButtonAction(ActionEvent e) {
 		mainController.getVista().setCenter(mainController.getControladorOpciones().getView());
@@ -161,28 +161,32 @@ public class MenuController implements Initializable {
 		dialog.setContentText("Elige una skin:");
 		Optional<String> result = dialog.showAndWait();
 
-		switch (result.get()) {
-		case "LIGHT":
-			primaryStage.getScene().getStylesheets().clear();
-			primaryStage.getScene().getStylesheets()
-					.add(getClass().getResource("/dad/puzzlepic/resources/light.css").toExternalForm());
-			break;
-		case "DARK":
-			primaryStage.getScene().getStylesheets().clear();
-			primaryStage.getScene().getStylesheets()
-					.add(getClass().getResource("/dad/puzzlepic/resources/dark.css").toExternalForm());
-			break;
-		case "ORANGE":
-			primaryStage.getScene().getStylesheets().clear();
-			primaryStage.getScene().getStylesheets()
-					.add(getClass().getResource("/dad/puzzlepic/resources/orange.css").toExternalForm());
-			break;
-		case "DEFAULT":
-			primaryStage.getScene().getStylesheets().clear();
-			primaryStage.getScene().getStylesheets()
-					.add(getClass().getResource("/dad/puzzlepic/resources/default.css").toExternalForm());
-			break;
-		default : break;
+		try {
+			switch (result.get()) {
+			case "LIGHT":
+				primaryStage.getScene().getStylesheets().clear();
+				primaryStage.getScene().getStylesheets()
+						.add(getClass().getResource("/dad/puzzlepic/resources/light.css").toExternalForm());
+				break;
+			case "DARK":
+				primaryStage.getScene().getStylesheets().clear();
+				primaryStage.getScene().getStylesheets()
+						.add(getClass().getResource("/dad/puzzlepic/resources/dark.css").toExternalForm());
+				break;
+			case "ORANGE":
+				primaryStage.getScene().getStylesheets().clear();
+				primaryStage.getScene().getStylesheets()
+						.add(getClass().getResource("/dad/puzzlepic/resources/orange.css").toExternalForm());
+				break;
+			case "DEFAULT":
+				primaryStage.getScene().getStylesheets().clear();
+				primaryStage.getScene().getStylesheets()
+						.add(getClass().getResource("/dad/puzzlepic/resources/default.css").toExternalForm());
+				break;
+			default:
+				break;
+			}
+		} catch (NoSuchElementException e1) {
 		}
 
 	}

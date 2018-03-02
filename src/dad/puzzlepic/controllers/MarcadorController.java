@@ -2,11 +2,18 @@ package dad.puzzlepic.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import dad.puzzlepic.models.Dificultad;
+import dad.puzzlepic.models.Jugador;
+import dad.puzzlepic.models.Marcador;
 import dad.puzzlepic.models.Modo;
 import dad.puzzlepic.views.PuzzlePicApp;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +25,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author fede
+ *
+ */
 public class MarcadorController implements Initializable {
 	@FXML
     private BorderPane view;
@@ -33,30 +44,30 @@ public class MarcadorController implements Initializable {
     private Button consultarButton, volverButton;
 
     @FXML
-    private TableView<?> tableScores;
+    private TableView<Marcador> tableScores;
 
     @FXML
-    private TableColumn<?, ?> puestoColumn;
+    private TableColumn<Marcador, String > puestoColumn;
 
     @FXML
-    private TableColumn<?, ?> idColumn;
+    private TableColumn<Marcador, String> nombreColumn;
 
     @FXML
-    private TableColumn<?, ?> nombreColumn;
+    private TableColumn<Marcador, String> puntuacionColumn;
 
     @FXML
-    private TableColumn<?, ?> modoColumn;
+    private TableColumn<Marcador, String> tiempoColumn;
 
     @FXML
-    private TableColumn<?, ?> tiempoColumn;
-
-    @FXML
-    private TableColumn<?, ?> puntuacionColumn;
+    private TableColumn<Marcador, String> fotoColumn;
 
     //
     
     private MainController mainController;
     private Stage primaryStage;
+   // private ArrayList<Marcador> marcadores = new ArrayList<>();
+    private ListProperty<Marcador> marcadores = new SimpleListProperty<>(this, "marcadores", FXCollections.observableArrayList());
+    Marcador marcador = new Marcador();
     
 	public MarcadorController(MainController mainController) throws IOException {
 		this.mainController = mainController;
@@ -71,6 +82,21 @@ public class MarcadorController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		comboGame.getItems().setAll(Modo.values());
+		comboGame.setValue(Modo.PUZZLE_PIECES);
+		lvlCombo.getItems().setAll(Dificultad.values());
+		lvlCombo.setValue(Dificultad.FACIL);
+		
+		//tabla
+		Bindings.bindBidirectional(tableScores.itemsProperty(), marcadores);		
+		puestoColumn.setCellValueFactory(v -> v.getValue().puestoProperty());
+		puestoColumn.setCellValueFactory(v -> v.getValue().nombreProperty());
+		puestoColumn.setCellValueFactory(v -> v.getValue().puntuacionProperty());
+		puestoColumn.setCellValueFactory(v -> v.getValue().tiempoProperty());
+		puestoColumn.setCellValueFactory(v -> v.getValue().fotoProperty());
+		
+		
+		
 		primaryStage.setOnCloseRequest(e->mainController.onSalirAction(e));
 	}
 

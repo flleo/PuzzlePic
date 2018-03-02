@@ -2,15 +2,19 @@ package dad.puzzlepic.models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
+/**
+ * 
+ * @author isaac
+ *
+ */
 public class Partida {
 
 	private IntegerProperty puntuacion;
-	private IntegerProperty tiempoRestante;
+	private IntegerProperty tiempo;
 	
 	public Partida() {
 		puntuacion = new SimpleIntegerProperty(this, "puntuacion", 0);
-		tiempoRestante = new SimpleIntegerProperty(this, "tiempoRestante");
+		tiempo = new SimpleIntegerProperty(this, "tiempoRestante");
 	}
 
 	public final IntegerProperty puntuacionProperty() {
@@ -28,20 +32,22 @@ public class Partida {
 	}
 	
 
-	public final IntegerProperty tiempoRestanteProperty() {
-		return this.tiempoRestante;
+	public final IntegerProperty tiempoProperty() {
+		return this.tiempo;
 	}
 	
 
-	public final int getTiempoRestante() {
-		return this.tiempoRestanteProperty().get();
+	public final int getTiempo() {
+		return this.tiempoProperty().get();
 	}
 	
 
-	public final void setTiempoRestante(final int tiempoRestante) {
-		this.tiempoRestanteProperty().set(tiempoRestante);
+	public final void setTiempo(final int tiempo) {
+		this.tiempoProperty().set(tiempo);
 	}
 	
+
 	
-	
+
+
 }

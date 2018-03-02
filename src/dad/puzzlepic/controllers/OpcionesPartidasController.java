@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import dad.puzzlepic.models.Dificultad;
 import dad.puzzlepic.models.Jugador;
+import dad.puzzlepic.models.Marcador;
 import dad.puzzlepic.models.Modo;
 import dad.puzzlepic.models.TroceadorImagenes;
 import dad.puzzlepic.views.PuzzlePicApp;
@@ -43,9 +44,6 @@ public class OpcionesPartidasController implements Initializable {
 	private Spinner<Integer> timeSpinner;
 
 	@FXML
-	private ComboBox<Integer> nRoundCombo;
-
-	@FXML
 	private ComboBox<Dificultad> lvlCombo;
 
 	@FXML
@@ -74,9 +72,9 @@ public class OpcionesPartidasController implements Initializable {
 	private TroceadorImagenes troceadorImagenes = new TroceadorImagenes();
 	private Jugador jugador;
 	private File foto = null;
-	private File directorioTroceadas = new File("src/dad/puzzlepic/resources/troceadas/");
 	private Stage primaryStage;
 	private ArrayList<File> fotos = new ArrayList<>();
+	
 
 	public OpcionesPartidasController(MainController mainController) throws IOException {
 		this.mainController = mainController;
@@ -97,13 +95,10 @@ public class OpcionesPartidasController implements Initializable {
 		lvlCombo.setValue(Dificultad.FACIL);
 		comboGame.getItems().setAll(Modo.values());
 		comboGame.setValue(Modo.PUZZLE_PIECES);
-		nRoundCombo.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-		nRoundCombo.setValue(1);
 
 		// Bindeos
 		jugador.nombreProperty().bind(playerField.textProperty());
 		jugador.tiempoProperty().bind(timeSpinner.valueProperty());
-		jugador.rondasProperty().bind(nRoundCombo.valueProperty());
 		jugador.dificultadProperty().bind(lvlCombo.valueProperty());
 		jugador.modoProperty().bind(comboGame.valueProperty());
 		jugador.directorioProperty().bind(selectedDirectory);
@@ -165,6 +160,7 @@ public class OpcionesPartidasController implements Initializable {
 					System.out.println("FACIL");
 					mainController.vaciaDirectorioTroceadas();
 					mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
+					
 					break;
 					
 				case MEDIA:
@@ -186,11 +182,12 @@ public class OpcionesPartidasController implements Initializable {
 			switch (mainController.getControladorOpciones().getComboGame().getValue()) {
 			case PUZZLE_PIECES:
 				System.out.println("PUZLE PIECES");
+				mainController.aleatorio();
 				puzzlePiecesController = new PuzzlePiecesController(mainController);
-				puzzlePiecesController.rescatarTroceadas();
-				puzzlePiecesController.mezcla();
 				puzzlePiecesController.bindeaMezcla();
-				mainController.getVista().setCenter(puzzlePiecesController.getView());
+				mainController.getVista().setCenter(puzzlePiecesController.getView());								
+				
+				
 				break;
 			case MATCH_PUZZLE:
 				System.out.println("MATCH PUZZLE");
@@ -210,6 +207,7 @@ public class OpcionesPartidasController implements Initializable {
 
 	
 	private void seleccionarFoto()  {
+		fotos.clear();
 	    for (File file : selectedDirectory.get().listFiles()) {
 			fotos.add(file);
 		}
@@ -230,10 +228,6 @@ public class OpcionesPartidasController implements Initializable {
 
 	public Spinner<Integer> getTimeSpinner() {
 		return timeSpinner;
-	}
-
-	public ComboBox<Integer> getnRoundCombo() {
-		return nRoundCombo;
 	}
 
 	public ComboBox<Dificultad> getLvlCombo() {

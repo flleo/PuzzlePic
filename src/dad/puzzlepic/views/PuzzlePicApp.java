@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
  * @author Isaac
  *
  */
-public class PuzzlePicApp extends Application {
+public class PuzzlePicApp extends Application  {
 
 
 	
@@ -33,7 +33,7 @@ public class PuzzlePicApp extends Application {
 
 
 		scene = new Scene(controlador.getVista(), 720, 720);
-		scene.getStylesheets().add(getClass().getResource("/dad/puzzlepic/resources/default.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/dad/puzzlepic/resources/orange.css").toExternalForm());
 
 		primaryStage.setTitle("PuzzlEpic");
 		primaryStage.getIcons().add(new Image("/dad/puzzlepic/resources/logo.png"));

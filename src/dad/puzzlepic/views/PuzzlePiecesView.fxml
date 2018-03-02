@@ -36,19 +36,28 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Jugador" />
-                        <Label fx:id="label_player" text="Label" />
+                        <Label fx:id="label_player" text="Label">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Tiempo" />
-                        <Label fx:id="label_tiempo" text="0:00" />
+                        <Label fx:id="label_tiempo" text="0:00">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Ronda" />
-                        <Label fx:id="label_ronda" text="1" />
+                        <Label text="Puntuación" />
+                        <Label fx:id="label_puntuacion" text="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </VBox>
                </children>
@@ -61,7 +70,7 @@
          <children>
             <Separator prefWidth="200.0" />
             <Label alignment="CENTER" text="La mezcla" />
-            <GridPane fx:id="lamezcla" minHeight="0.0" minWidth="0.0" VBox.vgrow="SOMETIMES">
+            <GridPane fx:id="lamezcla" minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="300.0" VBox.vgrow="SOMETIMES">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

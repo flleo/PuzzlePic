@@ -16,7 +16,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="95.0" prefWidth="508.0" spacing="50.0">
                <children>
-                  <Button fx:id="consultarButton" mnemonicParsing="false" prefWidth="150.0" text="CONSULTAR" />
+                  <Button fx:id="consultarButton" mnemonicParsing="false" onAction="#reseteaOnAction" prefWidth="150.0" text="RESETEAR" />
                   <Button fx:id="volverButton" alignment="CENTER" mnemonicParsing="false" prefWidth="150.0" text="VOLVER" />
                </children>
             </HBox>

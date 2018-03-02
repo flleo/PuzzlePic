@@ -20,18 +20,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
+
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
-=======
+
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
->>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
+
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -116,11 +116,10 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-<<<<<<< HEAD
+
 
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
-=======
->>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
+
 
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
 
@@ -223,9 +222,6 @@ public class SlidingPuzzleController implements Initializable {
 		}
 	}
 
-<<<<<<< HEAD
-	
-=======
 	public void posicionarMezcladas() {
 		try {
 			// System.out.println(troceadas.get(mezcla.get(0)).getName());
@@ -253,7 +249,7 @@ public class SlidingPuzzleController implements Initializable {
 		}
 
 	}
->>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
+
 
 	@FXML
 	private void ceroCeroOnButtonAction(ActionEvent event) {

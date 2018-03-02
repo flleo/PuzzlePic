@@ -124,7 +124,7 @@ public class PuzzlePiecesController  implements Initializable {
 	private Jugador jugador;
 	private Stage primaryStage;
 	private ArrayList<File> fotos = new ArrayList<>();
-	private File foto;
+	private File foto = new File("");
 	private int size ;
 	private Marcador marcador = new Marcador();
 	private Partida partida = new Partida();
@@ -178,7 +178,7 @@ public class PuzzlePiecesController  implements Initializable {
 	
 	
 	private void receteaMiFoto() {
-		//marcador = new Marcador();
+		
 				
 		mifoto0.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg")); 			
 		mifoto1.setImage(new Image("dad/puzzlepic/resources/interrogation.jpg")); 	
@@ -195,19 +195,24 @@ public class PuzzlePiecesController  implements Initializable {
 			mezclaClickes.get(i).setDisable(false);
 		}	
 		
-	/*	marcador.setFoto(foto.getName());
+	
+		
+	}
+	
+
+	private void nuevoMarcador() {
+		marcador = new Marcador();
+		marcador.setFoto(foto.getName());
 		marcador.setPuntuacion(String.valueOf(partida.getPuntuacion()));
 		marcador.setNombre(jugador.getNombre());			
 		marcador.setPuesto(calculaPuesto());
 		marcador.setTiempo(String.valueOf(partida.getTiempo()));
-		marcadores.add(marcador);
-	*/	
+		marcadorController.marcadoresProperty().add(marcador);
+		
 	}
-	
-
 	private String calculaPuesto() {
 		// TODO Auto-generated method stub
-		return null;
+		return "1";
 	}
 	public void bindeaMezcla() {
 		aleatorio = mainController.getAleatorio();
@@ -297,11 +302,12 @@ public class PuzzlePiecesController  implements Initializable {
     @FXML
     void siguienteOnAction(ActionEvent event) {   	    
     	receteaMiFoto();
+    	nuevoMarcador();
 		try {
 			mainController.vaciaDirectorioTroceadas();
 			seleccionaFoto();
 			mainController.setFotosTroceadas(troceadorImagenes.trocearFoto(foto, 3));
-			
+			//partida=new Partida();
 			aleatorio = mainController.getAleatorio();
 			bindeaMezcla();
 		} catch (IOException e) {
@@ -310,9 +316,15 @@ public class PuzzlePiecesController  implements Initializable {
 		}
 		
     }
-    
+    /**
+     * @author fede
+     * @param event
+     */
 	@FXML
 	void abandonarOnAction(ActionEvent event) {
+		nuevoMarcador();
+		receteaMiFoto();
+		//partida = new Partida();
 		mainController.getVista().setCenter(mainController.getControladorMenu().getView());
 		
 	}

@@ -14,7 +14,7 @@ public class Partida {
 	
 	public Partida() {
 		puntuacion = new SimpleIntegerProperty(this, "puntuacion", 0);
-		tiempo = new SimpleIntegerProperty(this, "tiempoRestante");
+		tiempo = new SimpleIntegerProperty(this, "tiempo", 9);
 	}
 
 	public final IntegerProperty puntuacionProperty() {

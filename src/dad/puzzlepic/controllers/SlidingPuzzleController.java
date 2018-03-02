@@ -20,12 +20,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+<<<<<<< HEAD
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+=======
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+
+>>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
 
 public class SlidingPuzzleController implements Initializable {
 	/**
@@ -110,8 +116,11 @@ public class SlidingPuzzleController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+<<<<<<< HEAD
 
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
+=======
+>>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
 
 		primaryStage.setOnCloseRequest(e -> mainController.onSalirAction(e));
 
@@ -214,7 +223,37 @@ public class SlidingPuzzleController implements Initializable {
 		}
 	}
 
+<<<<<<< HEAD
 	
+=======
+	public void posicionarMezcladas() {
+		try {
+			// System.out.println(troceadas.get(mezcla.get(0)).getName());
+			pieza00.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(0)).getName()));
+			pieza01.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(1)).getName()));
+			pieza02.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(2)).getName()));
+			pieza10.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(3)).getName()));
+			pieza11.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(4)).getName()));
+			pieza12.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(5)).getName()));
+			pieza20.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(6)).getName()));
+			pieza21.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(7)).getName()));
+			pieza22.setImage(new Image(
+					"dad/puzzlepic/resources/troceadas/" + troceadasList.get(mezcladasList.get(8)).getName()));
+		} catch (Exception e) {
+			mainController.advertencia("PuzzlePic", "No se ha podido cargar la foto, " + foto.getName(),
+					"Pasa a la siguiente.");
+		}
+
+	}
+>>>>>>> bba6ae6c3b01caa5fe888ed86e3444b22aec9382
 
 	@FXML
 	private void ceroCeroOnButtonAction(ActionEvent event) {
